@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+// README
+// json response time in Chrome network inspector should be near to serverTaskTime
+// but it acutualy shows serverTaskTime + renderingTaskTime.
+
 export default function SomeDynamicPage(props) {
   const start = Date.now();
   // Simulate heavy rendering
@@ -10,10 +14,11 @@ export default function SomeDynamicPage(props) {
   }
 
   const random = Math.floor(Math.random() * 1000);
+  const renderingTaskTime = Date.now() - start;
   return (
     <div>
       <p>Server task takes: {props.serverTaskTime}</p>
-      <p>Client task takes: {Date.now() - start}</p>
+      <p>Rendering task takes: {renderingTaskTime}</p>
       <Link href="/[id]" as={random.toString()}>
         <a>Go to random dynamic route</a>
       </Link>
