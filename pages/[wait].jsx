@@ -19,7 +19,7 @@ export default function SomeDynamicPage(props) {
     <div>
       <p>Server task takes: {props.serverTaskTime}</p>
       <p>Rendering task takes: {renderingTaskTime}</p>
-      <Link href="/[id]" as={random.toString()}>
+      <Link href="/[wait]" as={random.toString()}>
         <a>Go to random dynamic route</a>
       </Link>
     </div>
@@ -37,6 +37,7 @@ export async function getStaticProps(context) {
 
   return {
     props: {
+      unstable_revalidate: 60,
       serverTaskTime: context.params.wait,
     },
   };
